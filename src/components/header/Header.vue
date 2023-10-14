@@ -1,63 +1,116 @@
 <template>
-  <div class="bg-[#000]">
-    <div class="container text-white">
-      <div class="w-[100%] flex px-1 py-2 xl:py-10">
-        <div class="w-[70%]">
-          <h1 class="text-[19px] sm:text-[26px] md:text-[39px] md:font-bold lg:text-[56px]">Nodir Ikromov</h1>
-          <h2 class="text-[12px] sm:text-[22px] md:text-[25px] lg:text-[32px]">Front end developer</h2>
-          <ul class="pt-1">
-            <li class="grid grid-cols-2 md:mt-2">
-              <a v-for="(item, index) in data" :key="index" :href="item?.href" class="flex gap-1 text-white sm:my-[3px] md:my-0">
-                <img :src="item?.icon" alt="icon" class="w-[9%] sm:w-[18px]"/>
-                <p class="text-[80%] sm:text-[100%] md:text-[20px]">{{ item?.name }}</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="w-[30%] h-[30%] flex items-center justify-end object-cover ">
+  <div class="container">
+    <ul class="header__container">
+      <li class="header__lang">EN</li>
+      <li class="header__items-parent">
+        <div
+          v-for="item in headerData"
+          :key="item?.id"
+          class="header__child-item"
+        >
           <img
-            :src="Suhrob_aka"
-            alt="user imag"
-            class="rounded-[50%] w-[100%] object-cover sx:max-w-[100px] sx:max-h-[100px] sm:max-w-[150px] sm:max-h-[150px]  mmd:max-w-[250px] mmd:max-h-[250px]"
+            :src="item?.icon"
+            alt="avatar"
+            :class="
+              item?.icon
+                ? `object-cover block float-right icon__header`
+                : `hidden`
+            "
           />
+          <p :class="item?.id === 2 ? `countBuy` : `header__items-text`">
+            {{ item?.text }}
+          </p>
         </div>
-      </div>
-    </div>
+        <Header_search />
+      </li>
+    </ul>
   </div>
 </template>
 <script setup>
-import phone from "../../assets/svg/phone.svg";
-import github from "../../assets/svg/github.svg";
-import gmail from "../../assets/svg/gmail.svg";
-import tg from "../../assets/svg/tg.svg";
-import linkedin from "../../assets/svg/linedin.svg";
-import Suhrob_aka from "../../assets/sheff.jpg"
-const data = [
+import avatar from "../../assets/svg/avatar.svg";
+import buy from "../../assets/svg/buy.svg";
+
+import Header_search from "./Header_search.vue";
+
+const headerData = [
   {
-    name: "(99)-105 92 01",
-    icon: phone,
-    href: "#",
+    id: 1,
+    text: "My profile",
+    icon: avatar,
   },
   {
-      name: "LinkedIn",
-      icon: linkedin,
-      href: "https://www.linkedin.com/in/nodir-ikromov-641992279/",
-    },
-    {
-        name: "Telegram",
-        icon: tg,
-        href: "https://t.me/time_nnpm",
-    },
-    {
-        name: "GitHub",
-        icon: github,
-        href: "https://github.com/Ikromov-fs",
-    },
-    {
-      name: "nodirikromov10@gmail.com",
-      icon: gmail,
-      href: "mailto:nodirikromov10@gmail.com",
-    },
+    id: 2,
+    text: "2",
+    icon: buy,
+  },
+  {
+    id: 3,
+    text: "Items",
+    icon: "",
+  },
 ];
 </script>
-<style scoped></style>
+<style scoped>
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 26px;
+}
+.header__child-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 6px;
+}
+.header__items-parent {
+  display: flex;
+  gap: 32px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+.header__items-text:hover {
+  color: #40bfff;
+}
+.countBuy {
+  position: absolute;
+  top: -8px;
+  right: -9px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fb7181;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+@media (min-width: 320px) {
+  .header__items-parent {
+    font-size: 16px;
+    gap: 10px;
+  }
+  .header__lang {
+    display: none;
+  }
+}
+@media (min-width: 375px) {
+  .header__lang {
+    display: block;
+  }
+}
+@media (min-width: 576px) {
+  .header__lang {
+    display: block;
+  }
+  .header__items-parent {
+    font-size: 20px;
+    gap: 32px;
+  }
+}
+</style>
