@@ -7,6 +7,7 @@
           v-for="item in headerData"
           :key="item?.id"
           class="header__child-item"
+          @click="openModalRegisterIsTrue(item?.id)"
         >
           <img
             :src="item?.icon"
@@ -25,13 +26,16 @@
       </li>
     </ul>
   </div>
+  <Regsiter @isOpenRegister="openRegister = false" v-if="openRegister" />
 </template>
 <script setup>
+import { ref } from "vue";
 import avatar from "../../assets/svg/avatar.svg";
 import buy from "../../assets/svg/buy.svg";
-
+import Regsiter from "../modals/Regsiter.vue";
 import Header_search from "./Header_search.vue";
 
+const openRegister = ref(false);
 const headerData = [
   {
     id: 1,
@@ -49,6 +53,12 @@ const headerData = [
     icon: "",
   },
 ];
+
+function openModalRegisterIsTrue(item) {
+  if (item === 1) {
+    openRegister.value = true;
+  }
+}
 </script>
 <style scoped>
 .header__container {

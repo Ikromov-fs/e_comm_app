@@ -5,14 +5,21 @@
         type="text"
         placeholder="$0.00"
         autocomplete="off"
+        style="caret-color: #40bfff; outline: none"
         class="search__label-input"
+        v-model="inputData"
       />
-      <img :src="search" alt="search" />
+      <img :src="search" alt="search" class="cursor-pointer" />
     </label>
+    <div class="absolute">
+    {{ inputData }}
+    </div>
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
 import search from "../../assets/svg/search.svg";
+const inputData = ref();
 </script>
 <style scoped>
 .search__label {
@@ -36,7 +43,6 @@ import search from "../../assets/svg/search.svg";
     display: none;
     cursor: pointer;
   }
-  
   .header__items-parent {
     display: flex;
   }
