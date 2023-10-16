@@ -34,6 +34,9 @@ const inputData = ref();
 }
 
 @media (min-width: 320px) {
+  .search__parent{
+    margin-left: 15px;
+  }
   .header__items-parent {
     display: none;
   }

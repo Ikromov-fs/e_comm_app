@@ -26,6 +26,7 @@
       </li>
     </ul>
   </div>
+  <hr />
   <Regsiter @isOpenRegister="openRegister = false" v-if="openRegister" />
 </template>
 <script setup>
@@ -65,6 +66,7 @@ function openModalRegisterIsTrue(item) {
   display: flex;
   justify-content: space-between;
   padding-top: 26px;
+  padding-bottom: 14px;
 }
 .header__child-item {
   display: flex;
@@ -103,6 +105,9 @@ function openModalRegisterIsTrue(item) {
 @media (min-width: 320px) {
   .header__items-parent {
     font-size: 16px;
+    gap: 10px;
+  }
+  .header__child-item{
     gap: 10px;
   }
   .header__lang {

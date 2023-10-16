@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Header />
+    <Banner class="z-[-2]"/>
   </div>
 </template>
 <script setup>
-import Header from "../components/header/Header.vue";
+import Banner from "../components/banner/Banner.vue";
 </script>
 <style></style>
