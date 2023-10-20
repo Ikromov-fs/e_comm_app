@@ -27,7 +27,7 @@
     </ul>
   </div>
   <hr />
-  <Regsiter @isOpenRegister="openRegister = false" v-if="openRegister" />
+  <Regsiter @isOpenRegister="store.isRegister = false" v-if="store.isRegister" />
 </template>
 <script setup>
 import { ref } from "vue";
@@ -36,7 +36,8 @@ import buy from "../../assets/svg/buy.svg";
 import Regsiter from "../modals/Regsiter.vue";
 import Header_search from "./Header_search.vue";
 
-const openRegister = ref(false);
+import { auth } from "../../store/auth";
+const store = auth();
 const headerData = [
   {
     id: 1,
@@ -57,7 +58,7 @@ const headerData = [
 
 function openModalRegisterIsTrue(item) {
   if (item === 1) {
-    openRegister.value = true;
+    store.isRegister = true;
   }
 }
 </script>
@@ -107,7 +108,7 @@ function openModalRegisterIsTrue(item) {
     font-size: 16px;
     gap: 10px;
   }
-  .header__child-item{
+  .header__child-item {
     gap: 10px;
   }
   .header__lang {

@@ -11,9 +11,6 @@
       />
       <img :src="search" alt="search" class="cursor-pointer" />
     </label>
-    <div class="absolute">
-    {{ inputData }}
-    </div>
   </div>
 </template>
 <script setup>
