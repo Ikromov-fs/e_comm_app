@@ -2,7 +2,7 @@
   <el-dropdown>
     <span class="el-dropdown-link">
       <p 
-      :class="store.isRegister ? 'opacity-[0.1]' : 'opacity-1'"
+      :class="store.isRegister ? 'opacity-[0.1] hidden' : 'opacity-1'"
       class="sx:text-[15px] md:text-[20px] sx:mt-[8px] md:mt-[2px]">
         CATEGORY
       </p>
