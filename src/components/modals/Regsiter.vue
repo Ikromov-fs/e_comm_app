@@ -7,23 +7,20 @@
     class="reactive fixed z-[#99999] sx:w-[90%] mmd:w-[35%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fff] text-[#333] p-5 rounded-md"
   >
     <div>
-      <h1 class="flex justify-center text-xl font-[500]">Register</h1>
+      <h1 class="flex justify-center text-xl font-[500]">
+        <span v-if="store?.isLogin">Register</span>
+        <span v-if="!store?.isLogin">Login</span>
+      </h1>
       <div class="sx:mt-0 md:mt-7">
-        <FormInput
-          v-model="inputRegisterData.fullName"
-          :error="$v.fullName.$error"
-          label="F.I.Sh"
-          placeholder="F.I.Sh"
-          type="string"
-        />
-        <FormInput
-          v-model="inputRegisterData.password"
-          type="password"
-          placeholder="parol"
-          :error="$v.password.$error"
-          label="Parol"
-          class="md:my-4"
-        />
+        <div v-if="store?.isLogin">
+          <FormInput
+            v-model="inputRegisterData.fullName"
+            :error="$v.fullName.$error"
+            label="F.I.Sh"
+            placeholder="F.I.Sh"
+            type="string"
+          />
+        </div>
         <FormInput
           v-model="inputRegisterData.email"
           :error="$v.email.$error"
@@ -33,8 +30,23 @@
           class="sx:mb-2 md:my-4"
           name="email"
         />
-        <div @click="submitBtn" class="overflow-hidden">
+        <FormInput
+          v-model="inputRegisterData.password"
+          type="password"
+          placeholder="parol"
+          :error="$v.password.$error"
+          label="Parol"
+          class="md:my-4"
+        />
+        <div @click="submitBtn" class="overflow-hidden sx:mt-2">
           <Button_blue button-text="Submit" />
+        </div>
+        <pre>{{ store.isLogin }}</pre>
+        <div v-if="!store?.isLogin">
+          Create account
+          <span @click="goRegister" class="text-[blue] cursor-pointer mx-1"
+            >Register</span
+          >
         </div>
       </div>
     </div>
@@ -67,27 +79,35 @@ const $v = useVuelidate(rules, inputRegisterData);
 const submitBtn = async () => {
   $v.value.$validate();
   if (!$v.value.$error) {
-    try {
-      const userOptions = {
-        name: inputRegisterData.fullName,
-        password: inputRegisterData.password,
-        email: inputRegisterData.email,
-      };
-      const isRegister = await store.register(userOptions);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      (inputRegisterData.email = ""),
-        (inputRegisterData.password = ""),
-        (inputRegisterData.fullName = ""),
-        $v.value.$reset();
+    if (store.isLogin) {
+      try {
+        const userOptions = {
+          name: inputRegisterData.fullName,
+          password: inputRegisterData.password,
+          email: inputRegisterData.email,
+        };
+        const isRegister = await store.register(userOptions);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        (inputRegisterData.email = ""),
+          (inputRegisterData.password = ""),
+          (inputRegisterData.fullName = ""),
+          $v.value.$reset();
+      }
+    } else {
+      alert("ishladi");
     }
   }
 };
 
-// code input
+function goRegister() {
+  store.isLoginTrue();
+}
+
 function prevModal() {
   emit("isOpenRegister");
+  store.isLoginFalse();
 }
 const emit = defineEmits(["isOpenRegister"]);
 </script>

@@ -5,7 +5,7 @@
         <img
           :src="item?.img"
           alt="tavar image"
-          class="min-w-[100%] object-cover"
+          class="max-w-[95%] object-cover"
         />
         <h1
           class="sx:text-[9px] xs:text-[12px] sx:leading-[13px] ss:text-[17px] ss:top-3 ss:left-2 ss:leading-[19px] lg:text-[20px] lg:max-w-[180px] lg:leading-[29px] lg:font-bold absolute top-[1px] font-[500] text-[#223263] font-sans"
@@ -32,7 +32,7 @@
         </div>
         <p
           :class="item?.id === 2 ? `md:top-8` : ``"
-          class="absolute sx:text-[10px] sx:bottom-1 sx:right-1 sm:bottom-4 md:text-[20px] md:bottom-4 md:right-[10px] xl:bottom-9 xl:right-[23px] xl:text-[30px] text-[#40BFFF] font-bold font-serif"
+          class="absolute sx:text-[10px] sx:bottom-1 sx:right-1 sm:bottom-4 md:text-[20px] md:bottom-4 md:right-[10px] xl:bottom-9 xl:right-[50px] xl:text-[30px] text-[#40BFFF] font-bold font-serif"
         >
           ${{ item?.price }}
         </p>

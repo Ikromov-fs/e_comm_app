@@ -2,7 +2,7 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useToast } from 'vue-toastification';
 
-const toast = useToast()
+const toast = useToast();
 export const auth = defineStore("user", {
   state: () => ({
     isLogin: false,
@@ -13,12 +13,26 @@ export const auth = defineStore("user", {
     async register(options) {
       try {
         const user = await axios.post("/auth/register", options);
-        toast.success("You are registered")
-        console.log(user);
+        toast.success("You are registered");
       } catch (error) {
-        toast.error(`${error.message}`)
+        toast.error(`${error.message}`);
         console.log(error);
       }
+    },
+    async login(login) {
+      try {
+        const user = await axios.post("/auth/login", login);
+        toast.success("You are login");
+      } catch (error) {
+        toast.error(`${error.message}`);
+        console.log(error);
+      }
+    },
+    isLoginTrue() {
+      this.isLogin = true;
+    },
+    isLoginFalse() {
+      this.isLogin = false;
     },
   },
 });

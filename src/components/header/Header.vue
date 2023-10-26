@@ -27,15 +27,16 @@
     </ul>
   </div>
   <hr />
-  <Login @isOpenLogin="store.isLogin = false" v-if="store.isLogin" />
+  <Register @isOpenRegister="store.isRegister = false" v-if="store.isRegister" />
 </template>
 <script setup>
 import avatar from "../../assets/svg/avatar.svg";
 import buy from "../../assets/svg/buy.svg";
-import Login from "../modals/Login.vue";
+import Register from "../modals/Regsiter.vue";
 import Header_search from "./Header_search.vue";
 
 import { auth } from "../../store/auth";
+
 const store = auth();
 const headerData = [
   {
@@ -57,7 +58,7 @@ const headerData = [
 
 function openModalRegisterIsTrue(item) {
   if (item === 1) {
-    store.isLogin = true;
+    store.isRegister = true;
   }
 }
 </script>
