@@ -41,7 +41,6 @@
         <div @click="submitBtn" class="overflow-hidden sx:mt-2">
           <Button_blue button-text="Submit" />
         </div>
-        <pre>{{ store.isLogin }}</pre>
         <div v-if="!store?.isLogin">
           Create account
           <span @click="goRegister" class="text-[blue] cursor-pointer mx-1"
@@ -75,11 +74,10 @@ const rules = computed(() => {
   };
 });
 const $v = useVuelidate(rules, inputRegisterData);
-
 const submitBtn = async () => {
   $v.value.$validate();
-  if (!$v.value.$error) {
-    if (store.isLogin) {
+  if (store.isLogin) {
+    if (!$v.value.$error) {
       try {
         const userOptions = {
           name: inputRegisterData.fullName,
@@ -90,13 +88,28 @@ const submitBtn = async () => {
       } catch (error) {
         console.log(error);
       } finally {
+        emit("isOpenRegister");
+        store.isLoginFalse();
         (inputRegisterData.email = ""),
           (inputRegisterData.password = ""),
           (inputRegisterData.fullName = ""),
           $v.value.$reset();
       }
-    } else {
-      alert("ishladi");
+    }
+  } else {
+    try {
+      const userOptions = {
+        password: inputRegisterData.password,
+        email: inputRegisterData.email,
+      };
+      const isLogin = await store.login(userOptions);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      emit("isOpenRegister");
+      (inputRegisterData.email = ""),
+        (inputRegisterData.password = ""),
+        $v.value.$reset();
     }
   }
 };

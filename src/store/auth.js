@@ -21,7 +21,7 @@ export const auth = defineStore("user", {
     },
     async login(login) {
       try {
-        const user = await axios.post("/auth/login", login);
+        const isLogin = await axios.post("/auth/login", login);
         toast.success("You are login");
       } catch (error) {
         toast.error(`${error.message}`);

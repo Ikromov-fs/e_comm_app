@@ -1,13 +1,15 @@
 <template>
-  <div class="z-[-2]">
+  <div :class="store.isRegister ? `z-[-2]` : ``">
     <Banner />
     <BigCard class="sx:-translate-y-5 md:-translate-y-20" />
-    <MainCards />
+    <TavarPart />
   </div>
 </template>
 <script setup>
 import Banner from "../components/banner/Banner.vue";
 import BigCard from "../components/tavarCards/BigCard.vue";
-import MainCards from "../components/tavarCards/MainCards.vue";
+import TavarPart from "../components/home_page/TavarPart.vue";
+import { auth } from "../store/auth.js";
+const store = auth();
 </script>
 <style></style>
